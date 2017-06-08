@@ -1,0 +1,71 @@
+body {
+    background-color: #505050;
+    font-family: sans-serif;
+    padding: 0 0;
+    margin: 0 0;
+    border: none;
+    display: flex;
+    color: #e0e0e0;
+    padding-bottom: 3rem;
+}
+div {
+    display: flex;
+    flex-direction: column;
+}
+div#app {
+    flex-direction: column;
+    margin-left: 3rem;
+    margin-top: 2rem;
+}
+div.box {
+    padding-top: 1em;
+}
+div.box button {
+    align-self: flex-end;
+}
+div.box div.explain {
+    padding-bottom: 0.2em;
+}
+div.box textarea {
+    min-height: 8em;
+}
+div.validation {
+    padding-top: 0.2em;
+    color: #f0f0a0;
+}
+div.round {
+    padding: 1em;
+    margin-left: 1em;
+    margin-top: 1em;
+    border: solid 1px #f0f0a0;
+}
+div.round > div.content {
+    flex-direction: row;
+}
+div.table {
+    margin-top: 0.5em;
+    margin-left: 2em;
+}
+div.table > div.content {
+    margin-top: 0.5em;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+div.table > div.content div {
+    margin-left: 1em;
+    white-space: nowrap;
+}
+div.person {
+    margin-top: 1em;
+    margin-left: 1em;
+    padding: 1em;
+    border: solid 1px #a0a0f0;
+}
+div.person > div.content {
+    flex-direction: row;
+    margin-top: 0.5em;
+}
+div.person > div.content > div {
+    flex-direction: column;
+    margin-left: 1em;
+}

@@ -1,0 +1,46 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>Seating Arrangements</title>
+        <link rel='stylesheet' href='styles.css'/>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <div id='app'>
+            <div class='firstpage'>
+                <div class='heading'>Make Seating Arrangements</div>
+                <div class='box'>
+                    <div class='explain'>Enter names, one per line:</div>
+                    <textarea name='names' id='names'></textarea>
+                    <div class='validation' id='v-names'></div>
+                </div>
+                <div class='box'>
+                    <div class='explain'>How many tables?</div>
+                    <input name='tables' id='tables' value='' placeholder='5'/>
+                    <div class='validation' id='v-tables'></div>
+                </div>
+                <div class='box'>
+                    <div class='explain'>How many participants per table?</div>
+                    <input name='participants' id='participants' value='' placeholder='2'/>
+                    <div class='validation' id='v-participants'></div>
+                </div>
+                <div class='box'>
+                    <div class='validation' id='v-seating'></div>
+                </div>
+                <div class='box'>
+                    <div class='explain' id='e_seechart'></div>
+                    <button name='seechart' id='seechart'>See Chart</div>
+                </div>
+            </div>
+        </div>
+        <div id='result'>
+            <div class='box' id='result-output'>
+            </div>
+            <div class='box'>
+                <button name='back' id='back'>Back to Parameters</button>
+            </div>
+        </div>
+        <script src='seating.js'></script>
+    </body>
+</html>
