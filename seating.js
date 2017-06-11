@@ -30,6 +30,7 @@
     var e_seechart = elem("e_seechart");
     var seechart = elem("seechart");
     var back = elem("back");
+    var download = elem("download");
 
     var waiting = false;
     var parameters = {};
@@ -352,6 +353,62 @@
         element.innerHTML = l.join("");
     }
 
+    function writeCsvFile(csv, filename) {
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("Your browser seems to be blocking downloaded files, so this won't work.");
+            }
+        }
+    }
+
+    function exportAsCsv(seating) {
+        var exp = [];
+        var hdr = ['Name'];
+        for (var round = 0; round != seating.length; ++round) {
+            hdr.push("Round " + (round + 1).toString());
+            for (var table = 0; table != seating[round].length; ++table) {
+                for (var participant = 0; participant != seating[round][table].length; ++participant) {
+                    var name = seating[round][table][participant];
+                    if (!personSeatsByRound[name]) {
+                        personSeatsByRound[name] = {};
+                    }
+                    personSeatsByRound[name][round] = table;
+                }
+            }
+        }
+        exp.push(hdr.join(','));
+        var persons = Object.keys(personSeatsByRound).sort();
+        for (var i = 0; i != persons.length; ++i) {
+            var per = [];
+            per.push('"' + persons[i] + '"');
+            var seats = personSeatsByRound[persons[i]];
+            for (var j = 0; j != numrounds; ++j) {
+                var sname = 'n/a';
+                if ((seats[j] === 0) || seats[j]) {
+                    sname = 'Table ' + (seats[j] + 1).toString();
+                }
+                per.push(sname);
+            }
+            exp.push(per.join(','));
+        }
+        var csv = exp.join('\n');
+
+        writeCsvFile(csv, "Seating Chart for " + persons.length.toString() + ".csv");
+    }
+
     names.onchange = startValidationTimeout;
     names.onblur = startValidationTimeout;
     names.setAttribute('placeholder', "Names\nGo\nHere")
@@ -368,6 +425,7 @@
     seechart.onclick = function () {
         app.remove();
         var seating = calculateSeating(parameters);
+        parameters.seating = seating;
         renderSeating(seating, result_output, parameters.errors);
         document.body.appendChild(result);
     }
@@ -375,6 +433,10 @@
     back.onclick = function () {
         result.remove();
         document.body.appendChild(app);
+    }
+
+    download.onclick = function () {
+        exportAsCsv(parameters.seating);
     }
 
     seechart.disabled = true;
