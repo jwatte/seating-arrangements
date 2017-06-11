@@ -395,7 +395,7 @@
             var per = [];
             per.push('"' + persons[i] + '"');
             var seats = personSeatsByRound[persons[i]];
-            for (var j = 0; j != numrounds; ++j) {
+            for (var j = 0; j != seating.length; ++j) {
                 var sname = 'n/a';
                 if ((seats[j] === 0) || seats[j]) {
                     sname = 'Table ' + (seats[j] + 1).toString();

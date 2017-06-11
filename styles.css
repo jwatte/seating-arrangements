@@ -20,7 +20,11 @@ div#app {
 div.box {
     padding-top: 1em;
 }
+div.box.buttons {
+    flex-direction: row;
+}
 div.box button {
+    margin-left: 1em;
     align-self: flex-end;
 }
 div.box div.explain {
